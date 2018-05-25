@@ -12,73 +12,95 @@
         <link rel="stylesheet" href="breakout.css">
     </head>
     <body>
-        <div>
-            <div class="box">
-                <div class="box-item red column1"></div>
-                <div class="box-item red column2"></div>
-                <div class="box-item red column3"></div>
-                <div class="box-item red column4"></div>
-                <div class="box-item red column5"></div>
-                <div class="box-item red column6"></div>
-                <div class="box-item red column7"></div>
-                <div class="box-item red column8"></div>
-                <div class="box-item red column9"></div>
-                <div class="box-item red column10"></div>
-            </div>
-        
-            <div class="box">
-                <div class="box-item yellow column1"></div>
-                <div class="box-item yellow column2"></div>
-                <div class="box-item yellow column3"></div>
-                <div class="box-item yellow column4"></div>
-                <div class="box-item yellow column5"></div>
-                <div class="box-item yellow column6"></div>
-                <div class="box-item yellow column7"></div>
-                <div class="box-item yellow column8"></div>
-                <div class="box-item yellow column9"></div>
-                <div class="box-item yellow column10"></div>
-            </div>
+        <!-- entire page -->
+        <div class="outer">
+            <!-- header1 container -->
+            <h1 class="flex-container">
+                <div> 
+                    Score: &nbsp;<span id="score"> 30</span> 
+                </div>
+                <div >
+                    Speed: <span id="speed">On</span>
+                </div>
+                <div>
+                    Sound: <span id="sound">On</span>
+                </div>
+                <div id="hearts">
+                     <img src="heart.png" width="30" height="30">
+                     <img src="heart.png" width="30" height="30">
+                     <img src="heart.png" width="30" height="30">
+                </div>
+            </h1>
+            
+            <!-- game board container -->
+            <div>
+                <!-- grid container -->
+                <div class="grid">
+                    <!-- Row 1 -->
+                    <div class="box-item col1 row1"></div>
+                    <div class="box-item col2 row1"></div>
+                    <div class="box-item col3 row1"></div>
+                    <div class="box-item col4 row1"></div>
+                    <div class="box-item col5 row1"></div>
+                    <div class="box-item col6 row1"></div>
+                    <div class="box-item col7 row1"></div>
+                    <div class="box-item col8 row1"></div>
+                    <div class="box-item col9 row1"></div>
+                    <div class="box-item col10 row1"></div>
+                    <!-- Row 2 -->
+                    <div class="box-item col1 row2"></div>
+                    <div class="box-item col2 row2"></div>
+                    <div class="box-item col3 row2"></div>
+                    <div class="box-item col4 row2"></div>
+                    <div class="box-item col5 row2"></div>
+                    <div class="box-item col6 row2"></div>
+                    <div class="box-item col7 row2"></div>
+                    <div class="box-item col8 row2"></div>
+                    <div class="box-item col9 row2"></div>
+                    <div class="box-item col10 row2"></div>
+                    <!-- Row 3 -->
+                    <div class="box-item col1 row3"></div>
+                    <div class="box-item col2 row3"></div>
+                    <div class="box-item col3 row3"></div>
+                    <div class="box-item col4 row3"></div>
+                    <div class="box-item col5 row3"></div>
+                    <div class="box-item col6 row3"></div>
+                    <div class="box-item col7 row3"></div>
+                    <div class="box-item col8 row3"></div>
+                    <div class="box-item col9 row3"></div>
+                    <div class="box-item col10 row3"></div>
+                    <!-- Row 4 -->
+                    <div class="box-item col1 row4"></div>
+                    <div class="box-item col2 row4"></div>
+                    <div class="box-item col3 row4"></div>
+                    <div class="box-item col4 row4"></div>
+                    <div class="box-item col5 row4"></div>
+                    <div class="box-item col6 row4"></div>
+                    <div class="box-item col7 row4"></div>
+                    <div class="box-item col8 row4"></div>
+                    <div class="box-item col9 row4"></div>
+                    <div class="box-item col10 row4"></div>
+                    <!-- Row 5 -->
+                    <div class="box-item col1 row5"></div>
+                    <div class="box-item col2 row5"></div>
+                    <div class="box-item col3 row5"></div>
+                    <div class="box-item col4 row5"></div>
+                    <div class="box-item col5 row5"></div>
+                    <div class="box-item col6 row5"></div>
+                    <div class="box-item col7 row5"></div>
+                    <div class="box-item col8 row5"></div>
+                    <div class="box-item col9 row5"></div>
+                    <div class="box-item col10 row5"></div>
 
-            <div class="box">
-                <div class="box-item green column1"></div>
-                <div class="box-item green column2"></div>
-                <div class="box-item green column3"></div>
-                <div class="box-item green column4"></div>
-                <div class="box-item green column5"></div>
-                <div class="box-item green column6"></div>
-                <div class="box-item green column7"></div>
-                <div class="box-item green column8"></div>
-                <div class="box-item green column9"></div>
-                <div class="box-item green column10"></div>
-            </div>
+                    <div class="ball"></div>
+                    <div class="paddle"></div>
 
-            <div class="box">
-                <div class="box-item ltblue column1"></div>
-                <div class="box-item ltblue column2"></div>
-                <div class="box-item ltblue column3"></div>
-                <div class="box-item ltblue column4"></div>
-                <div class="box-item ltblue column5"></div>
-                <div class="box-item ltblue column6"></div>
-                <div class="box-item ltblue column7"></div>
-                <div class="box-item ltblue column8"></div>
-                <div class="box-item ltblue column9"></div>
-                <div class="box-item ltblue column10"></div>
-            </div>
+                </div>
 
-            <div class="box">
-                <div class="box-item drblue column1"></div>
-                <div class="box-item drblue column2"></div>
-                <div class="box-item drblue column3"></div>
-                <div class="box-item drblue column4"></div>
-                <div class="box-item drblue column5"></div>
-                <div class="box-item drblue column6"></div>
-                <div class="box-item drblue column7"></div>
-                <div class="box-item drblue column8"></div>
-                <div class="box-item drblue column9"></div>
-                <div class="box-item drblue column10"></div>
+
             </div>
+                
         </div>
-        
         <script src='breakout.js'></script>
     </body>
 </html>'

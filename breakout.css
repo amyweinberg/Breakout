@@ -3,13 +3,48 @@ html {
 }
 
 body {
-    min-width: 300px;
-    max-width: 300px;
+    min-width: 900px;
+    max-width: 900px;
 }
-/* .box {
-    display: grid;
-    grid-template-columns: auto auto auto auto auto auto auto auto auto auto; 
-} */
+
+.outer {
+    border: 2px solid mistyrose;
+    width: 1000px;
+}
+.flex-container {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 990px;
+    margin-left: 20px;
+}
+
+.flex-container > div {
+    width: 200px;
+    margin-right: auto;
+    text-align: left;
+    font-size: 20px;
+    color: white; 
+    border: 2px solid blue;
+}
+
+#score {
+    color: white;
+}
+
+#speed {
+    color: red;
+}
+
+#sound {
+    color: red;
+}
+
+.grid {
+    position: relative;
+    border: 2px solid white;
+    height: 600px;
+    width: 1000px;
+}
 
 .box-item {
     height: 40px;
@@ -17,75 +52,96 @@ body {
     border: 1px solid black;
 }
 
-.column1 {
+.col1 {
     position: absolute;
-    left: 10px;
+    left: 0px;
 }
 
-.column2 {
+.col2 {
     position: absolute;
     left: 100px;
 }
 
-.column3 {
+.col3 {
     position: absolute;
     left: 200px;
 }
-
-.column4 {
+.col4 {
     position: absolute;
     left: 300px;
 }
-
-.column5 {
+.col5 {
     position: absolute;
     left: 400px;
 }
-.column6 {
+.col6 {
     position: absolute;
     left: 500px;
 }
-.column7 {
+.col7 {
     position: absolute;
     left: 600px;
 }
-.column8 {
+.col8 {
     position: absolute;
     left: 700px;
 }
-.column9 {
+.col9 {
     position: absolute;
     left: 800px;
 }
-.column10 {
+.col10 {
     position: absolute;
     left: 900px;
 }
 
-.red {
+
+.row1 {
+    position: absolute;
+    top: 0px;
     background-color: red;
 }
 
-.yellow {
+.row2 {
+    position: absolute;
+    top: 40px;
     background-color: yellow;
-    position: absolute;
-    top: 75px;
 }
 
-.green {
+.row3 {
+    position: absolute;
+    top: 80px;
     background-color: #00ff00;
-    position: absolute;
-    top: 125px;
 }
 
-.ltblue {
+.row4 {
+    position: absolute;
+    top: 120px;
     background-color: #00ccff;
-    position: absolute;
-    top: 175px;
 }
 
-.drblue {
-    background-color: #004de6;
+.row5 {
     position: absolute;
-    top: 225px;
+    top: 160px;
+    background-color: #004de6;
+}
+
+
+.ball {
+    background-color: white;
+    width: 15px;
+    height: 15px;
+    border: 0.5px solid yellow;
+    border-radius: 50%;
+    position: absolute;
+    top: 300px;
+    left: 600px;
+}
+.paddle {
+    height: 20px;
+    width: 120px;
+    background-color: purple;
+    position: absolute;
+    bottom: 0px;
+    left: 600px;
 }
