@@ -1,3 +1,6 @@
+* {
+    box-sizing: border-box;
+}
 html {
     background-color: black;
 }
@@ -9,13 +12,11 @@ body {
 
 .outer {
     border: 2px solid mistyrose;
-    width: 1000px;
+    width: 1004px;
 }
 .flex-container {
     display: flex;
     flex-wrap: nowrap;
-    width: 990px;
-    margin-left: 20px;
 }
 
 .flex-container > div {
@@ -26,7 +27,10 @@ body {
     color: white; 
     border: 2px solid blue;
 }
-
+.header-row {
+    padding: 20px;
+    border-bottom:2px solid white;
+}
 #score {
     color: white;
 }
@@ -41,7 +45,6 @@ body {
 
 .grid {
     position: relative;
-    border: 2px solid white;
     height: 600px;
     width: 1000px;
 }
@@ -50,48 +53,39 @@ body {
     height: 40px;
     width: 100px;
     border: 1px solid black;
+    position: absolute;
 }
 
 .col1 {
-    position: absolute;
     left: 0px;
 }
 
 .col2 {
-    position: absolute;
     left: 100px;
 }
 
 .col3 {
-    position: absolute;
     left: 200px;
 }
 .col4 {
-    position: absolute;
     left: 300px;
 }
 .col5 {
-    position: absolute;
     left: 400px;
 }
 .col6 {
-    position: absolute;
     left: 500px;
 }
 .col7 {
-    position: absolute;
     left: 600px;
 }
 .col8 {
-    position: absolute;
     left: 700px;
 }
 .col9 {
-    position: absolute;
     left: 800px;
 }
 .col10 {
-    position: absolute;
     left: 900px;
 }
 
