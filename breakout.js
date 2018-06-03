@@ -7,11 +7,13 @@ const numRows = 5;
 
 
 let createDivs = function() {
-    
+    let container = $('#container')
     for(let x=1; x<=numRows; x++) {
         for(let i=1; i<=numColumns; i++) {
-            let newDiv = $('<div></div>').insertBefore('.ball').addClass('box-item');
-            newDiv.addClass('col' + i + ' ' + 'row' + x);
+            let newDiv = $('<div></div>')
+                .addClass('box-item')
+                .addClass('col' + i + ' ' + 'row' + x)
+            container.append(newDiv)
         }
     }
 };
