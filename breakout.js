@@ -5,10 +5,16 @@ const NUM_ROWS = 5
 function initGame() {
     addGameBlocks()
     initPaddlePosition()
+    initUserControls()
+}
+
+function initUserControls(){
+    document.addEventListener('keydown', movePaddleHandler)
+    document.addEventListener('keyup', stopMovingPaddleHandler)
 }
 
 function addGameBlocks () { 
-    console.log("adding game blocks");
+    console.debug("adding game blocks");
     let blockContainer = document.getElementById('blockContainer');
 
     for (let x = 1; x <=NUM_ROWS; x++) {
@@ -22,10 +28,8 @@ function addGameBlocks () {
   };
 
 function initPaddlePosition(){
-    console.log('setting paddle position')
     document.querySelector('.paddle').style.left=600
 }
-
 
 
 function getKeyCode(event) {
@@ -34,49 +38,52 @@ function getKeyCode(event) {
     console.log(pressedKeyCode);
 }; 
 
+let paddleTimer = null;
 
-function movePaddle(event) {
-
-}
+const LEFT_KEY_CODE = 37
+const RIGHT_KEY_CODE = 39
+const PADDLE_MOVE_STEP = 4
+const PADDLE_INTERVAL = 4
 
 function movePaddleHandler(event) {
-    //move left or right depending on keycode
-
-    //get keycode
-    let pressedKeyCode = event.keyCode;
-    console.log(pressedKeyCode)
-
-    let paddle = document.querySelector('.paddle')
-    let left = parseInt(paddle.style.left.replace('px',''))
-
-    console.log(left)
-
-    if(pressedKeyCode === 37) {
-        //move left
-        //Get the current left position of paddle and subtract 20
-        paddle.style.left = left - 20
-    } else if(pressedKeyCode === 39) {
-        //move right
-        //Get the current left position of paddle and add 20
-        paddle.style.left = left + 20
+    if(paddleTimer) {
+        return
     }
 
-    //if keycode is right, move right
+    let pressedKeyCode = getKeyCode(event);
+    if(pressedKeyCode !== LEFT_KEY_CODE && pressedKeyCode !== RIGHT_KEY_CODE){
+        return
+    }
+
+    let isRight = pressedKeyCode === RIGHT_KEY_CODE
+
+    paddleTimer = setInterval(function(){
+        movePaddle(isRight)
+    }, PADDLE_INTERVAL);
 }
 
-document.addEventListener('keydown', movePaddleHandler);
+function movePaddle(isRight=false) {
+    let moveDirection = isRight ? 1 : -1    
+    let paddle = document.querySelector('.paddle')
+    let left = parseInt(paddle.style.left)
+    left = left + PADDLE_MOVE_STEP * moveDirection
+    paddle.style.left = left
+    console.log(left)
+}
 
-// let paddle = document.querySelector('.paddle');
-// //paddle.style.left = paddlePosition.toString() + 'px';
 
-// if(pressedKeyCode !== 37 && pressedKeyCode !== 39) {
-//     return;
-// } else if(pressedKeyCode === 37) {
+function stopMovingPaddleHandler (event) {
+    let pressedKeyCode = getKeyCode(event);
+    if(pressedKeyCode !== LEFT_KEY_CODE && pressedKeyCode !== RIGHT_KEY_CODE) {
+       return
+    }
 
-//     paddle.style.left = paddlePosition.toString() + 'px';
-// } else if (pressedKeyCode === 39) {
+    clearInterval(paddleTimer);
+    paddleTimer = null;
+}
 
-//     paddle.style.left = paddlePosition.toString() + 'px';
-// }
-// document.addEventListener('load', initGame)
-document.body.onload = initGame();
+document.body.onload = initGame;
+
+//check if left or right key is pressed (keydown)
+//move paddle repeatedly left or right
+//until keyup event
