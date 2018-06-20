@@ -60,8 +60,18 @@ function stopMovingPaddleHandler (event) {
 }
 
 function getRandomBallVelocities(totalSpeed) {
-    let x = 5
-    let y = 5
+    let x, y
+    let randomNum = Math.floor(Math.random() * totalSpeed) + 1
+    
+    if(randomNum !== totalSpeed) {
+        x = randomNum
+        y = totalSpeed - x
+    } else {
+        x = randomNum - 1
+        y = totalSpeed - x
+    }
+  
+    console.log(x, y)
     //TODO - calculate a random x,y such that x+y = 10
     return {
         x: x,
@@ -70,9 +80,10 @@ function getRandomBallVelocities(totalSpeed) {
 }
 
 let blockContainer = document.getElementById('blockContainer');
-let ballVelocity = getRandomBallVelocities()
+let ballVelocity = getRandomBallVelocities(10)
 let firstBall = new Ball(BALL_START_POSITION.x, BALL_START_POSITION.y, ballVelocity.x, ballVelocity.y, blockContainer)
 let paddle = new Paddle(400, 0, blockContainer)
+
 
 function animateFrames() {
     requestAnimationFrame(animateFrames)
@@ -81,6 +92,7 @@ function animateFrames() {
 }
 
 document.body.onload = initGame;
+
 
 
 
