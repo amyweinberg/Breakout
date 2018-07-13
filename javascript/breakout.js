@@ -1,3 +1,7 @@
+import Ball from "./ball.js"
+import Paddle from "./paddle.js"
+
+
 const NUM_COLUMNS = 10;
 const NUM_ROWS = 5
 const LEFT_KEY_CODE = 37
@@ -7,7 +11,7 @@ const PADDLE_INTERVAL = 4
 const MIN_LEFT_POSITION = 0
 const MAX_LEFT_POSITION = 880
 const BALL_START_POSITION = {
-    x: 50,
+    x: 600,
     y: 201
 }
 
@@ -59,17 +63,13 @@ function stopMovingPaddleHandler (event) {
     }
 }
 
-function getRandomBallVelocities(totalSpeed) {
+function getRandomBallVelocities(totalVelocity) {
     let x, y
-    let randomNum = Math.floor(Math.random() * totalSpeed) + 1
-    
-    if(randomNum !== totalSpeed) {
-        x = randomNum
-        y = totalSpeed - x
-    } else {
-        x = randomNum - 1
-        y = totalSpeed - x
-    }
+    let minTotalVelocity = 0.3 * totalVelocity
+    let maxTotalVelocity = 0.7 * totalVelocity
+
+    x = Math.floor((Math.random() * maxTotalVelocity) + minTotalVelocity
+    y = totalVelocity - x
   
     console.log(x, y)
     //TODO - calculate a random x,y such that x+y = 10
