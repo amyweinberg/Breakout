@@ -61,6 +61,10 @@ class Ball {
         }
     }
 
+    remove() {
+        this.el.remove()
+    }
+
 }
 
 export default Ball

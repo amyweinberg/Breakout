@@ -10,13 +10,15 @@ class GameBlock {
         this.row = row
 
         this.el = document.createElement('div')
-        this.el.classList.add("box-item", COL_CLASS + this.col, ROW_CLASS + this.row)
+        this.el.classList.add("box-item", "block", COL_CLASS + this.col, ROW_CLASS + this.row)
 
 
         container.appendChild(this.el)
     }
 
-    
+    remove() {
+        this.el.remove()
+    }
 
 
 

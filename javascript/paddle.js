@@ -46,6 +46,10 @@ class Paddle  {
     stop() {
         this.velocityX = 0
     }
+
+    remove() {
+        this.el.remove()
+    }
 }
 
 export default Paddle
