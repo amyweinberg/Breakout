@@ -25,8 +25,7 @@ function render(data) {
     views[data.currentView].init()
 }
 
-document.addEventListener("DOMContentLoaded", function(){
-
+function init() {
     let viewContainer = document.getElementById('view-container')
     
     let welcomeView = views[VIEW_NAMES.welcome] = new Welcome(viewContainer)
@@ -44,8 +43,14 @@ document.addEventListener("DOMContentLoaded", function(){
         gameState.currentView = VIEW_NAMES.game
         render(gameState)
     })
+
+     gameView.onGameEnd(function(){
+        gameState.currentView = VIEW_NAMES.gameover
+        render(gameState)
+    })
     
-    //Step 1, document.createElement(). Step 2: Invent your own front end framework using ES6 classes and pub/sub. Thanks honey.
 
     render(gameState)
-});
+}
+
+document.addEventListener("DOMContentLoaded", init);

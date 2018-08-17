@@ -6,8 +6,6 @@ const NUM_COLUMNS = 10
 const NUM_ROWS = 5
 const LEFT_KEY_CODE = 37
 const RIGHT_KEY_CODE = 39
-const PADDLE_MOVE_STEP = 4
-const PADDLE_INTERVAL = 4
 const MIN_LEFT_POSITION = 0
 const MAX_LEFT_POSITION = 880
 const Y_BALL_START_POSITION = 201
@@ -27,11 +25,11 @@ function getRandomBallVelocities(totalVelocity) {
     let x, y
     let getRandomFactor = function () {
         //what is a good const name for 0.7 and 0.3???
-        return Math.random() * (0.7 - 0.3) + 0.3
+        return Math.random() * 0.4 + 0.3
     }
     
     let xTotalVelocity = getRandomFactor() * totalVelocity
-    let yTotalVelocity = getRandomFactor() * totalVelocity
+    let yTotalVelocity = totalVelocity-xTotalVelocity
     
     return {
         x: xTotalVelocity,
@@ -47,7 +45,12 @@ class Game {
         this.paddles = []
         this.blocks = []
         this.eventHandlers = []
+        this.gameEndListeners = []
         this.animationFrame = null
+    }
+
+    onGameEnd(fn) {
+        this.gameEndListeners.push(fn)
     }
 
     init() {
@@ -84,13 +87,20 @@ class Game {
                                         <div id="blockContainer"></div>
                                     </div>`
         
+    
 
         let self = this
         addGameBlocks(blockConfig)
         addBalls()
         addPaddles()
         initUserControls()
-        animateFrames()    
+        animateFrames()   
+
+        function endGame() {
+        self.gameEndListeners.forEach(function(fn){
+            fn()
+        })
+    }
         
         function addGameBlocks(blockData){
             let blockContainer = document.getElementById('blockContainer')
@@ -100,6 +110,11 @@ class Game {
                 self.blocks.push(block)
             })
         }
+
+        document.querySelectorAll('.box-item').forEach((block)=>{
+            block.addEventListener('click', ()=>{endGame()})
+        })
+        
 
         function initUserControls(){
             document.addEventListener('keydown', movePaddleHandler)
@@ -146,22 +161,40 @@ class Game {
             self.animateFrame = requestAnimationFrame(animateFrames)
             self.balls.forEach(function(ball){
                 ball.move()
+                detectCollision(ball)
             })
             self.paddles.forEach(function(paddle){
                 paddle.move()
             })
 
         }
+
+        function detectCollision(ball){
+            if(isVerticalCollision(ball))
+                ball.verticalCollision()
+            if(isHorizontalCollision(ball))
+                ball.horizontalCollision()  
+        }
+
+        
+        function isVerticalCollision(ball) {
+            let y = ball.top
+            return (y >= 580 || y <= 200)
+        }
+        function isHorizontalCollision(ball) {
+            let x = ball.left
+            return (x >= self.container.offsetWidth - ball.width  || x <= 0)
+        }
        
         function addBalls() {
-            var gameContainer = document.getElementById('gameContainer');
+            let gameContainer = document.getElementById('gameContainer');
             let ballVelocity = getRandomBallVelocities(10)
             self.balls.push(new Ball(FIRST_BALL_START_POSITION.x, FIRST_BALL_START_POSITION.y, ballVelocity.x, ballVelocity.y, gameContainer))
         }
 
         function addPaddles(){
-             var gameContainer = document.getElementById('gameContainer');
-            self.paddles.push(new Paddle(400, 0, gameContainer))
+            let gameContainer = document.getElementById('gameContainer');
+            self.paddles.push(new Paddle(400, gameContainer))
         }
 
     }

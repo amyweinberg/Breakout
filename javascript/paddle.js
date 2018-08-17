@@ -1,8 +1,9 @@
-class Paddle  {
-    constructor (x,vX, container) {
-        this.x = x
-        this.velocityX = vX
+const PADDLE_VELOCITY = 7
 
+class Paddle  {
+    constructor (x,container) {
+        this.x = x
+        this.velocityX = 0
         this.el = document.createElement('div')
         this.el.classList.add('paddle')
         this.el.style.left = this.x
@@ -36,11 +37,11 @@ class Paddle  {
     }   
 
     movePaddleRight() {
-        this.velocityX = 5
+        this.velocityX = PADDLE_VELOCITY
     }
 
     movePaddleLeft() {
-        this.velocityX = -5
+        this.velocityX = -PADDLE_VELOCITY
     }
 
     stop() {
