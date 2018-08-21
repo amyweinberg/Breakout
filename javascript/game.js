@@ -9,6 +9,7 @@ const RIGHT_KEY_CODE = 39
 const MIN_LEFT_POSITION = 0
 const MAX_LEFT_POSITION = 880
 const Y_BALL_START_POSITION = 201
+const PADDLE_LENGTH = 120
 
 let blockConfig = []
 for (let row = 1; row <=NUM_ROWS; row++) {
@@ -96,11 +97,12 @@ class Game {
         initUserControls()
         animateFrames()   
 
+        //ends the game
         function endGame() {
-        self.gameEndListeners.forEach(function(fn){
-            fn()
-        })
-    }
+            self.gameEndListeners.forEach(function(fn){
+                fn()
+            })
+        }
         
         function addGameBlocks(blockData){
             let blockContainer = document.getElementById('blockContainer')
@@ -162,11 +164,19 @@ class Game {
             self.balls.forEach(function(ball){
                 ball.move()
                 detectCollision(ball)
+                detectGameOver(ball)
             })
             self.paddles.forEach(function(paddle){
                 paddle.move()
             })
+        }
 
+        function detectGameOver(ball) {
+            let y = ball.bottom
+            console.log(y)
+            if(y >= 615) {
+                endGame()
+            }
         }
 
         function detectCollision(ball){
@@ -175,12 +185,32 @@ class Game {
             if(isHorizontalCollision(ball))
                 ball.horizontalCollision()  
         }
+    
+    
 
-        
         function isVerticalCollision(ball) {
             let y = ball.top
-            return (y >= 580 || y <= 200)
+            let x = ball.left
+            let paddleXleft = self.paddles[0].left
+            let paddleXright = paddleXleft + PADDLE_LENGTH                
+            
+            //detect ball hit paddle
+            let hitPaddle = (y >= 581 && paddleXleft <= x && x <=paddleXright)
+                
+            //hit a brick?
+            let hitBrick = y <= 200
+            
+            //hit the ceiling?
+            let hitCeiling = false
+            
+
+            return hitPaddle || hitBrick || hitCeiling
+
+
         }
+
+      
+        
         function isHorizontalCollision(ball) {
             let x = ball.left
             return (x >= self.container.offsetWidth - ball.width  || x <= 0)

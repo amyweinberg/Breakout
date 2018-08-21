@@ -36,6 +36,11 @@ class Paddle  {
         this.el.style.left = this.x
     }   
 
+    get left() {
+        return this.x
+    }
+
+
     movePaddleRight() {
         this.velocityX = PADDLE_VELOCITY
     }
