@@ -16,6 +16,22 @@ class GameBlock {
         container.appendChild(this.el)
     }
 
+    get top() {
+        return this.el.offsetTop
+    }
+
+    get bottom() {
+        return this.el.offsetTop + this.el.offsetHeight
+    }
+    get left() {
+        return this.el.offsetLeft
+    }
+
+    get right() {
+        return this.el.offsetLeft + this.el.offsetWidth
+    }
+
+
     remove() {
         this.el.remove()
     }

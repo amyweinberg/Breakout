@@ -29,7 +29,7 @@ function getRandomBallVelocities(totalVelocity) {
         return Math.random() * 0.4 + 0.3
     }
     
-    let xTotalVelocity = getRandomFactor() * totalVelocity
+    let xTotalVelocity = Math.floor(getRandomFactor() * totalVelocity)
     let yTotalVelocity = totalVelocity-xTotalVelocity
     
     return {
@@ -56,17 +56,13 @@ class Game {
 
     init() {
         const xStartPosition = function () {
-            return Math.random() * (MAX_LEFT_POSITION - MIN_LEFT_POSITION) + MIN_LEFT_POSITION;
+            return Math.floor(Math.random() * (MAX_LEFT_POSITION - MIN_LEFT_POSITION) + MIN_LEFT_POSITION)
         }
         const FIRST_BALL_START_POSITION = {
             x: xStartPosition(),
             y: Y_BALL_START_POSITION,
         }
 
-        const SECOND_BALL_START_POSITION = {
-            x: xStartPosition(),
-            y: Y_BALL_START_POSITION,
-        }
         this.container.innerHTML = `<div>
                                         <div class="flex-container header-row">
                                             <div> 
@@ -85,7 +81,7 @@ class Game {
                                             </div>
                                         </div>
                                         <div id="gameContainer" class="grid"></div>
-                                        <div id="blockContainer"></div>
+                                        
                                     </div>`
         
     
@@ -105,8 +101,8 @@ class Game {
         }
         
         function addGameBlocks(blockData){
-            let blockContainer = document.getElementById('blockContainer')
-            blockContainer.innerHTML = ''
+            let blockContainer = document.getElementById('gameContainer')
+            
             blockData.forEach((data)=>{
                 let block = new GameBlock(data.row, data.col, blockContainer)
                 self.blocks.push(block)
@@ -162,8 +158,13 @@ class Game {
         function animateFrames() {
             self.animateFrame = requestAnimationFrame(animateFrames)
             self.balls.forEach(function(ball){
-                ball.move()
-                detectCollision(ball)
+                let collision = ball.move(self.blocks.concat(self.paddles))
+                // let collision = ball.move(self.paddles)
+
+                if(collision) {
+                    //get rid of that object
+                }
+                // detectCollision(ball)
                 detectGameOver(ball)
             })
             self.paddles.forEach(function(paddle){
@@ -173,24 +174,15 @@ class Game {
 
         function detectGameOver(ball) {
             let y = ball.bottom
-            console.log(y)
             if(y >= 615) {
                 endGame()
             }
         }
+    
 
-        function detectCollision(ball){
-            if(isVerticalCollision(ball))
-                ball.verticalCollision()
-            if(isHorizontalCollision(ball))
-                ball.horizontalCollision()  
-        }
-    
-    
 
         function isVerticalCollision(ball) {
-            let y = ball.top
-            let x = ball.left
+           
             let paddleXleft = self.paddles[0].left
             let paddleXright = paddleXleft + PADDLE_LENGTH                
             
@@ -219,7 +211,21 @@ class Game {
         function addBalls() {
             let gameContainer = document.getElementById('gameContainer');
             let ballVelocity = getRandomBallVelocities(10)
-            self.balls.push(new Ball(FIRST_BALL_START_POSITION.x, FIRST_BALL_START_POSITION.y, ballVelocity.x, ballVelocity.y, gameContainer))
+            let ball = new Ball(FIRST_BALL_START_POSITION.x, FIRST_BALL_START_POSITION.y, ballVelocity.x, ballVelocity.y, gameContainer)
+            ball.onCollision(onCollision)
+            self.balls.push(ball)
+            
+        }
+
+        function onCollision(collisionData){
+            let obstacle = collisionData.obstacle
+            if(!obstacle.indestructable && obstacle.remove) {
+                obstacle.remove()
+                self.blocks = self.blocks.filter((block)=>{
+                    return block !== obstacle
+                })
+            }
+                
         }
 
         function addPaddles(){
@@ -242,6 +248,10 @@ class Game {
         this.eventHandlers.forEach(function(handlerData){
             document.removeEventListener(handlerData.eventName, handlerData.handler)
         })
+
+        this.balls = []
+        this.paddles = []
+        this.eventHandlers = []
 
         window.cancelAnimationFrame(this.animateFrame)
         

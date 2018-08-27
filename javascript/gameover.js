@@ -14,7 +14,7 @@ class Gameover {
         this.remove()
         this.container.innerHTML = `<div class="gameover">
                                     <h2>GAME OVER</h2>
-                                    <button class="playAgainButon" id="play-again-button">Play Again</button>
+                                    <button class="playAgainButton" id="play-again-button">Play Again</button>
                                     `
         this.el = document.querySelector('.gameover')
         this.button = document.querySelector('#play-again-button')

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack -p",
-    "watch": "webpack --watch"
+    "watch": "webpack --devtool source-map --watch"
   },
   "repository": {
     "type": "git",

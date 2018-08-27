@@ -40,6 +40,7 @@ function init() {
     })
 
      gameoverView.onGameStart(function(){
+        console.log('clicked')
         gameState.currentView = VIEW_NAMES.game
         render(gameState)
     })

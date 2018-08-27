@@ -1,4 +1,4 @@
-class View = {
+class View {
     constructor (x, container) {
         //model data
         this.x = x
