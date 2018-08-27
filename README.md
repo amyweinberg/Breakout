@@ -1,7 +1,7 @@
 # Breakout
 A simple implementation of the classic Breakout game writing in Vanilla JavaScript. Uses Euler integration for physics, and ES6 classes for UI components.
 
-![screenshot](https://www.dropbox.com/s/jnd33n4rxaxo4cq/Screenshot%202018-08-27%2011.15.00.png?dl=0)
+![breakout-screenshot](https://user-images.githubusercontent.com/20506567/44676097-46d6bc00-aa00-11e8-906b-86eb5b7f0899.png)
 
 ## Installation
 
