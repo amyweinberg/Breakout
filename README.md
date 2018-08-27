@@ -5,8 +5,6 @@ A simple implementation of the classic Breakout game writing in Vanilla JavaScri
 
 ## Installation
 
-- `npm install`
-
+- `npm install`
 - `npm run build`
-
 - `httpster`
