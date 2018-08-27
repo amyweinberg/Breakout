@@ -3,7 +3,7 @@ A simple implementation of the classic Breakout game writing in Vanilla JavaScri
 
 ## Installation
 
--  `npm install`
+- `npm install`
 - `npm run dev`
 
 https://www.dropbox.com/s/jnd33n4rxaxo4cq/Screenshot%202018-08-27%2011.15.00.png?dl=0
