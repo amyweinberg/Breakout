@@ -8,5 +8,3 @@ A simple implementation of the classic Breakout game writing in Vanilla JavaScri
 - `npm install`
 - `npm run build`
 - `httpster`
-
-
