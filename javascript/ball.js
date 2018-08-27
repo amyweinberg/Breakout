@@ -107,7 +107,6 @@ class Ball {
             let blockTop = block.top
             let blockBottom = block.bottom
 
-            console.log(blockLeft, blockRight, blockTop, blockBottom)
             //Are we overlapping?
             // console.log(ballLeft, ballRight, ballTop, blockTop, blockLeft, blockRight)
             if( (ballRight >= blockLeft && ballLeft <= blockRight) && 

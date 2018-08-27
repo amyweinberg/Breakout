@@ -159,8 +159,7 @@ class Game {
             self.animateFrame = requestAnimationFrame(animateFrames)
             self.balls.forEach(function(ball){
                 let collision = ball.move(self.blocks.concat(self.paddles))
-                // let collision = ball.move(self.paddles)
-
+                
                 if(collision) {
                     //get rid of that object
                 }

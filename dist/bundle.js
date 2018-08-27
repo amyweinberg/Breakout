@@ -204,7 +204,6 @@ class Ball {
             let blockTop = block.top
             let blockBottom = block.bottom
 
-            console.log(blockLeft, blockRight, blockTop, blockBottom)
             //Are we overlapping?
             // console.log(ballLeft, ballRight, ballTop, blockTop, blockLeft, blockRight)
             if( (ballRight >= blockLeft && ballLeft <= blockRight) && 
@@ -546,8 +545,7 @@ class Game {
             self.animateFrame = requestAnimationFrame(animateFrames)
             self.balls.forEach(function(ball){
                 let collision = ball.move(self.blocks.concat(self.paddles))
-                // let collision = ball.move(self.paddles)
-
+                
                 if(collision) {
                     //get rid of that object
                 }
